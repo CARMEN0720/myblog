@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>regression on A Hugo website</title>
+    <link>/tags/regression/</link>
+    <description>Recent content in regression on A Hugo website</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 14 Oct 2019 15:59:13 -0600</lastBuildDate>
+    
+	<atom:link href="/tags/regression/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>巧用viewport来个性化定制图形</title>
+      <link>/2019/10/14/%E5%B7%A7%E7%94%A8viewport%E6%9D%A5%E4%B8%AA%E6%80%A7%E5%8C%96%E5%AE%9A%E5%88%B6%E5%9B%BE%E5%BD%A2/</link>
+      <pubDate>Mon, 14 Oct 2019 15:59:13 -0600</pubDate>
+      
+      <guid>/2019/10/14/%E5%B7%A7%E7%94%A8viewport%E6%9D%A5%E4%B8%AA%E6%80%A7%E5%8C%96%E5%AE%9A%E5%88%B6%E5%9B%BE%E5%BD%A2/</guid>
+      <description>首先画出原始图：
+library(grid)# Using Viewports to Display Dataescape_prop &amp;lt;-c(0.24, 0.28, 0.28, 0.33, 0.33, 0.32, 0.3, 0.21, 0.3, 0.28, 0.17,0.27, 0.21, 0.18, 0.22, 0.21, 0.19, 0.17, 0.17, 0.15, 0.25, 0.19,0.19, 0.22, 0.21, 0.18, 0.24, 0.23, 0.27, 0.16, 0.17, 0.22, 0.17,0.25, 0.19, 0.25, 0.12, 0.17, 0.22, 0.22)nfires &amp;lt;-c(953, 620, 584, 839, 1415, 1180, 656, 408, 872, 965, 853,1492, 951, 772, 1541, 1114, 479, 860, 1166, 1208, 657, 1140,1223, 1275, 489, 932, 1096, 1378, 1033, 889, 1046, 818, 1213,782, 962, 1666, 2017, 1689, 1885, 1435)nfirescode &amp;lt;- nfires/max(nfires)index &amp;lt;- (1:40)/41pushViewport(viewport(width=.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.58.3" />
+
+
+<title>巧用viewport来个性化定制图形 - A Hugo website</title>
+<meta property="og:title" content="巧用viewport来个性化定制图形 - A Hugo website">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo_tiger.png"
+         width="500"
+         height="500"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/rstudio/blogdown">GitHub</a></li>
+    
+    <li><a href="https://twitter.com/rstudio">Twitter</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">2 min read</span>
+    
+
+    <h1 class="article-title">巧用viewport来个性化定制图形</h1>
+
+    
+    <span class="article-date">2019-10-14</span>
+    
+
+    <div class="article-content">
+      
+
+
+<p>首先画出原始图：</p>
+<pre class="r"><code>library(grid)
+
+# Using Viewports to Display Data
+escape_prop &lt;-c(0.24, 0.28, 0.28, 0.33, 0.33, 0.32, 0.3, 0.21, 0.3, 0.28, 0.17,
+    0.27, 0.21, 0.18, 0.22, 0.21, 0.19, 0.17, 0.17, 0.15, 0.25, 0.19,
+    0.19, 0.22, 0.21, 0.18, 0.24, 0.23, 0.27, 0.16, 0.17, 0.22, 0.17,
+    0.25, 0.19, 0.25, 0.12, 0.17, 0.22, 0.22)
+nfires &lt;-c(953, 620, 584, 839, 1415, 1180, 656, 408, 872, 965, 853,
+    1492, 951, 772, 1541, 1114, 479, 860, 1166, 1208, 657, 1140,
+    1223, 1275, 489, 932, 1096, 1378, 1033, 889, 1046, 818, 1213,
+    782, 962, 1666, 2017, 1689, 1885, 1435)
+
+nfirescode &lt;- nfires/max(nfires)
+index &lt;- (1:40)/41
+
+pushViewport(viewport(width=.9, height=.9))
+pushViewport(viewport(y=.75, width=.9, height=.9))
+for (i in 1:40) {
+  vp &lt;- viewport(x=index[i],y=escape_prop[i], height=.03, width=.03)
+  pushViewport(vp)
+  grid.circle(r=sqrt(nfirescode[i]/pi))
+  upViewport()
+}
+grid.xaxis(at=c(0,index[c(10,20,30,40)]), label=seq(1960,2000,10))
+grid.yaxis(at=seq(0,.5,.1))
+grid.text(&quot;Proportion of Escaped Fires&quot;, y=.6)</code></pre>
+<p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/raw_fig-1.png" width="672" /></p>
+<p>画原件一</p>
+<pre class="r"><code>burningtree &lt;- function() {
+  grid.rect(x=.5, y=.2, width=.2, height=.4, gp=gpar(fill=&quot;grey&quot;, col=NA))
+  grid.circle(x=.5, y=.5, r=.3, gp=gpar(fill=&quot;orange&quot;, col=NA))
+  pushViewport(viewport(clip=&quot;on&quot;))
+  pushViewport(viewport(x=.5, y=0, angle=45))
+  grid.rect(x=.5, y=.5, width=.2, height=.2, gp=gpar(fill=&quot;grey&quot;, col=NA))
+  upViewport(2)
+}
+pushViewport(viewport())
+burningtree()</code></pre>
+<p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/element2-1.png" width="672" /></p>
+<p>画原件二</p>
+<pre class="r"><code>
+stickperson &lt;- function() {
+  grid.circle(x=.5, y=.8, r=.1, gp=gpar(fill=&quot;yellow&quot;))
+  grid.lines(c(.5,.5), c(.7,.2)) # vertical line for body
+  grid.lines(c(.5,.7), c(.6,.7)) # right arm
+  grid.lines(c(.5,.3), c(.6,.7)) # left arm
+  grid.lines(c(.5,.65), c(.2,0)) # right leg
+  grid.lines(c(.5,.35), c(.2,0)) # left leg
+}
+pushViewport(viewport())
+stickperson()</code></pre>
+<p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/element1-1.png" width="672" /></p>
+<p>用原件一填充图形</p>
+<pre class="r"><code>pushViewport(viewport(width=.9, height=.9))
+pushViewport(viewport(y=.75, width=.9, height=.9))
+for (i in 1:40) {
+  vp &lt;- viewport(x=index[i],y=escape_prop[i], height=nfirescode[i]/10,
+                 width=.03)
+  pushViewport(vp)
+  burningtree() 
+  upViewport()
+}
+grid.yaxis(at=seq(0,.5,.1))
+grid.xaxis(at=c(0,index[c(10,20,30,40)]), label=seq(1960,2000,10))
+grid.text(&quot;Proportion of Escaped Fires&quot;, y=.6)</code></pre>
+<p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/fill1-1.png" width="672" /></p>
+<p>用原件二填充图形</p>
+<pre class="r"><code>pushViewport(viewport(width=.9, height=.9))
+pushViewport(viewport(y=.75, width=.9, height=.9))
+for (i in 1:40) {
+  vp &lt;- viewport(x=index[i],y=escape_prop[i], height=nfirescode[i]/10,
+                 width=.03)
+  pushViewport(vp)
+  stickperson()
+  upViewport()
+}
+grid.yaxis(at=seq(0,.5,.1))
+grid.xaxis(at=c(0,index[c(10,20,30,40)]), label=seq(1960,2000,10))
+grid.text(&quot;Proportion of Escaped Fires&quot;, y=.6)</code></pre>
+<p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/fill2-1.png" width="672" /></p>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+  </body>
+</html>
+

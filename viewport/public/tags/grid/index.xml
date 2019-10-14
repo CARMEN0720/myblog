@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>grid on A Hugo website</title>
+    <link>/tags/grid/</link>
+    <description>Recent content in grid on A Hugo website</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 14 Oct 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/grid/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>用grid包的viewport来放置图片元素</title>
+      <link>/2019/10/14/%E7%94%A8grid%E5%8C%85%E7%9A%84viewport%E6%9D%A5%E6%94%BE%E7%BD%AE%E5%9B%BE%E7%89%87%E5%85%83%E7%B4%A0/</link>
+      <pubDate>Mon, 14 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/10/14/%E7%94%A8grid%E5%8C%85%E7%9A%84viewport%E6%9D%A5%E6%94%BE%E7%BD%AE%E5%9B%BE%E7%89%87%E5%85%83%E7%B4%A0/</guid>
+      <description>首先画出原始图：
+library(grid)# Using Viewports to Display Dataescape_prop &amp;lt;-c(0.24, 0.28, 0.28, 0.33, 0.33, 0.32, 0.3, 0.21, 0.3, 0.28, 0.17,0.27, 0.21, 0.18, 0.22, 0.21, 0.19, 0.17, 0.17, 0.15, 0.25, 0.19,0.19, 0.22, 0.21, 0.18, 0.24, 0.23, 0.27, 0.16, 0.17, 0.22, 0.17,0.25, 0.19, 0.25, 0.12, 0.17, 0.22, 0.22)nfires &amp;lt;-c(953, 620, 584, 839, 1415, 1180, 656, 408, 872, 965, 853,1492, 951, 772, 1541, 1114, 479, 860, 1166, 1208, 657, 1140,1223, 1275, 489, 932, 1096, 1378, 1033, 889, 1046, 818, 1213,782, 962, 1666, 2017, 1689, 1885, 1435)nfirescode &amp;lt;- nfires/max(nfires)index &amp;lt;- (1:40)/41pushViewport(viewport(width=.</description>
+    </item>
+    
+  </channel>
+</rss>
